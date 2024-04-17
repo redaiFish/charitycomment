@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会员用餐评价</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+<style>
+  form {
+    padding-left: 0px;
+    line-height: 180%;
+  }
+
+
+  .Tips p {
+    font-size: 22px;
+  }
+
+  .spacer {
+    margin-bottom: 0px;
+    /* 调整空白大小 */
+  }
+
+  input[type="submit"] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #019026;
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .container {
+    flex: 1;
+    /* margin-top: -90%; */
+    margin-top: -360px;
+  }
+
+
+
+  /* 增大<P>请问...吗？字体大小 */
+  form p {
+    font-size: 25px;
+    /* 将<P>请问...吗？放在同一行并居中 */
+    /* text-align: center; */
+    /* padding-left: 0px; */
+  }
+
+  label {
+    font-size: 22px;
+    /* 修改选择按钮为您希望的字体大小 */
+  }
+
+  /* 满意、一般、不满意选项放在同一行 */
+  form label {
+    text-align: center;
+    display: inline-block;
+    margin: 0 10px;
+    /* 可根据需要调整间距 */
+  }
+
+
+  .centered-text {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  /* 放大 radio 按钮 */
+  input[type="radio"] {
+    transform: scale(2);
+    /* 调整放大倍数 */
+  }
+</style>
+</head>
+
+<body>
+  <div style="background-image: url('../kids.jpg');
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+  height: 100vh;"> <!-- 背景图片铺满整个屏幕 -->
+  </div>
+
+  <div class="container">
+    <div class="Tips">
+      <!-- <p class="spacer">我们清楚有许多不足之处，于是决定在接收评价的同时代表您们为山里的孩子献出一份爱心。每当您给予我们一次评价，我们都会代表您向慈善机构捐助0.2元。</p> -->
+    </div>
+
+    <hr color="#019026" width="100%" />
+    <form id=" reviewForm" action="/savecomment" method="POST">
+      <p>1.请问您对我的菜品满意吗？</p>
+      <input type="radio" id="satisfiedFoodQuality" name="food" value="满意" required>
+      <label for="satisfiedFoodQuality">满意</label>
+      <input type="radio" id="averageFoodQuality" name="food" value="一般">
+      <label for="averageFoodQuality">一般</label>
+      <input type="radio" id="dissatisfiedFoodQuality" name="food" value="不满意">
+      <label for="dissatisfiedFoodQuality">不满意</label><br><br>
+
+      <p>2.请问您对我的服务满意吗？</p>
+      <input type="radio" id="satisfiedService" name="service" value="满意" required>
+      <label for="satisfiedService">满意</label>
+      <input type="radio" id="averageService" name="service" value="一般">
+      <label for="averageService">一般</label>
+      <input type="radio" id="dissatisfiedService" name="service" value="不满意">
+      <label for="dissatisfiedService">不满意</label><br><br>
+
+      <p>3.请问您对我的洁净满意吗？</p>
+      <input type="radio" id="satisfiedCleanliness" name="cleanliness" value="满意" required>
+      <label for="satisfiedCleanliness">满意</label>
+      <input type="radio" id="averageCleanliness" name="cleanliness" value="一般">
+      <label for="averageCleanliness">一般</label>
+      <input type="radio" id="dissatisfiedCleanliness" name="cleanliness" value="不满意">
+      <label for="dissatisfiedCleanliness">不满意</label><br><br>
+
+      <p>4.请问您对我的米饭满意吗？</p>
+      <input type="radio" id="satisfiedRiceQuality" name="rice" value="满意" required>
+      <label for="satisfiedRiceQuality">满意</label>
+      <input type="radio" id="averageRiceQuality" name="rice" value="一般">
+      <label for="averageRiceQuality">一般</label>
+      <input type="radio" id="dissatisfiedRiceQuality" name="rice" value="不满意">
+      <label for="dissatisfiedRiceQuality">不满意</label><br><br>
+
+
+      <!-- 隐藏字段 -->
+      <input type="hidden" id="storeId" name="storeId" value="">
+      <input type="hidden" id="commentId" name="commentId" value="">
+      <input type="hidden" id="orderId" name="orderId" value="">
+      <input type="hidden" id="activity" name="activity" value="">
+      <input type="hidden" id="wechatOpenId" name="wechatOpenId" value="">
+
+      <!-- 其他建议 -->
+      <!-- <p>您对我们还有什么其它建议吗？</p>
+      <textarea id="suggestions" name="suggestions" rows="4" cols="50"></textarea><br><br> -->
+
+
+      <!-- <img src="../image/kids.jpg" alt="image"> -->
+    </form>
+
+    <div style="height: 50px;"></div>
+
+  </div>
+
+  <input type="submit" value="提交评价">
+
+
+  </div>
+
+  <script>
+    // 解析 URL 查询参数
+    function getUrlParams() {
+      const params = {};
+      const urlParams = new URLSearchParams(window.location.search);
+      for (const [key, value] of urlParams) {
+        params[key] = value;
+      }
+      return params;
+    }
+
+    // 设置全局变量的函数
+    function setGlobalVariables() {
+      const params = getUrlParams();
+      document.getElementById('storeId').value = params.br || '';
+      document.getElementById('commentId').value = params.id || '';
+      document.getElementById('orderId').value = params.orderid || '';
+      document.getElementById('activity').value = params.actv || '';
+      document.getElementById('wechatOpenId').value = params.oi || '';
+    }
+
+    // 页面加载完毕后执行
+    document.addEventListener('DOMContentLoaded', function () {
+      setGlobalVariables(); // 设置全局变量
+    });
+
+  </script>
+
+  </script>
+</body>
+
+</html>

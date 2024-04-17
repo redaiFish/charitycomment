@@ -1,0 +1,21 @@
+{
+  "name": "comment",
+  "version": "1.0.0",
+  "description": "会员在门店消费完并在此页面评价后捐款给慈善机构",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Charity",
+    "Menmber",
+    "Comments"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1"
+  }
+}
