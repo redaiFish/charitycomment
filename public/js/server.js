@@ -6,14 +6,6 @@ const mysql = require('mysql');
 const app = express();
 const PORT = process.env.PORT || 8100;
 
-创建数据库连接
-const connection = mysql.createConnection({
-  host: '43.138.249.104',     // 数据库主机名
-  port: '3306',
-  user: 'root',     // 数据库用户名
-  password: 'XNDJ8888!', // 数据库密码
-  database: 'charity_comment'  // 数据库名称
-});
 
 连接到数据库
 connection.connect((err) => {
